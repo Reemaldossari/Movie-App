@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.movies.MoviesViewModel" />
+
+        <variable
+            name="listFragment"
+            type="com.example.movies.MoviesListFragment" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MoviesListFragment">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/tool_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#2A2237"
+            app:layout_constraintTop_toTopOf="parent"
+            app:title="Movies"
+            app:titleTextColor="@color/white" />
+
+        <SearchView
+            android:id="@+id/search"
+            android:layout_width="265dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:background="@drawable/background"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tool_bar" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/sort_list"
+            android:layout_width="75dp"
+            android:layout_height="60dp"
+            android:text="Sort"
+            app:chipBackgroundColor="#00FFF6F6"
+            app:chipCornerRadius="15dp"
+            app:chipIcon="@drawable/ic_sort"
+            app:layout_constraintBottom_toBottomOf="@id/search"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/search" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/filter_list"
+            android:layout_width="75dp"
+            android:layout_height="60dp"
+            android:text="Filter"
+            app:chipBackgroundColor="#00FFF6F6"
+            app:chipCornerRadius="15dp"
+            app:chipIcon="@drawable/ic_filter"
+            app:layout_constraintBottom_toBottomOf="@id/search"
+            app:layout_constraintEnd_toStartOf="@id/sort_list"
+            app:layout_constraintTop_toTopOf="@id/search" />
+
+        <ImageView
+            android:id="@+id/status_image"
+            android:layout_width="330dp"
+            android:layout_height="249dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:moviesApiStatus="@{viewModel.status}" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/grid_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="120dp"
+            android:layout_marginEnd="8dp"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/search"
+            app:listData="@{viewModel.movies}"
+            app:spanCount="2" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
